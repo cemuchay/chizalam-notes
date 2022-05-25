@@ -13,6 +13,7 @@ export default function Home() {
 
       <div>Hello Guys</div>
       <Link href="/blog"> Blog </Link>
+      hii
     </div>
   )
 }
