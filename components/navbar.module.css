@@ -1,0 +1,136 @@
+/* NAVBAR STYLING STARTS */
+.navbar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 20px;
+  background: #FFFFFF;
+  color: #111111;
+}
+
+.textLogoPrimary {
+  font-size: 16px;
+  font-weight: bold;
+  color: #111111;
+  height: 30px;
+  width: 180px;
+}
+
+.navLinks a {
+  color: #111111;
+  text-decoration: none;
+}
+
+/* NAVBAR MENU */
+.menu {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 1em;
+  font-size: 18px;
+}
+
+.menu li:hover {
+  background-color: var(--white);
+  border-radius: 5px;
+  -webkit-transition: 0.3s ease;
+  transition: 0.3s ease;
+}
+
+.menu li {
+  padding: 5px 14px;
+}
+
+/* DROPDOWN MENU */
+.services {
+  position: relative;
+}
+
+.dropdown {
+  background-color: var(--white);
+  padding: 1em 0;
+  position: absolute;
+  /*WITH RESPECT TO PARENT*/
+  display: none;
+  border-radius: 8px;
+  top: 35px;
+}
+
+.dropdown li + li {
+  margin-top: 10px;
+}
+
+.dropdown li {
+  padding: 0.5em 1em;
+  width: 8em;
+  text-align: center;
+}
+
+.dropdown li:hover {
+  background-color: var(--white);
+}
+
+.services:hover .dropdown {
+  display: block;
+}
+
+/* STICKY NAVBAR */
+.sticky {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  width: 100%;
+}
+
+/*RESPONSIVE NAVBAR MENU STARTS*/
+/* CHECKBOX HACK */
+/*HAMBURGER MENU*/
+.hamburger {
+  display: none;
+  font-size: 24px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+/* APPLYING MEDIA QUERIES */
+@media (max-width: 768px) {
+  .menu {
+    display: none;
+    position: absolute;
+    background-color: var(--white);
+    right: 5%;
+    text-align: center;
+    padding: 16px 0;
+    color: var(--black);
+  }
+  .menu li:hover {
+    display: inline-block;
+    background-color: var(--white);
+    -webkit-transition: 0.3s ease;
+    transition: 0.3s ease;
+  }
+  .menu li + li {
+    margin-top: 12px;
+  }
+  .hamburger {
+    display: block;
+  }
+  .dropdown {
+    left: 50%;
+    top: 30px;
+    -webkit-transform: translateX(35%);
+            transform: translateX(35%);
+  }
+  .dropdown li:hover {
+    background-color: black;
+  }
+}
+/*# sourceMappingURL=navbar.module.css.map */
