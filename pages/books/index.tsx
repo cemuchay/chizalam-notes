@@ -6,12 +6,12 @@ export default function Blog() {
             <h1>Blog</h1>
             <ul>
                 <li>
-                    <Link href="/blog/the-runaway-jury">
+                    <Link href="/books/the-runaway-jury">
                         <a> The Runaway Jury</a>
                     </Link>
                 </li>
                 <li>
-                    <Link href="/blog/a-promised-land">
+                    <Link href="/books/a-promised-land">
                         <a>A Promised Land</a>
                     </Link>
                 </li>

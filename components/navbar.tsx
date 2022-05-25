@@ -6,12 +6,10 @@ export default function Navbar() {
         <nav className={styles.navbar}>
             {/* LOGO  */}
             <div className={styles.logo}>
-                <span className={styles.textLogoPrimary}>
-                    ChizalamNotes
-                </span>
-                <span className={styles.textLogoSecondary}>
-                    THE BLOG OF CHIZALAM
-                </span>
+                <div className={styles.textLogoPrimary}>
+                </div>
+                <div className={styles.textLogoSecondary}>
+                </div>
             </div>
 
             {/* NAVIGATION MENU */}
