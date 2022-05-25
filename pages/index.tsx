@@ -2,10 +2,12 @@ import type { ReactElement } from 'react'
 import Layout from '../components/layout'
 import Head from 'next/head'
 import Link from 'next/link'
-// import Image from 'next/image'
-// import styles from '../styles/Home.module.css'
+import Image from 'next/image'
+import styles from '../styles/Home.module.css'
+import latestBookImg from '../public/images/theRunAwayJury.png'
 
-export default function Home() {
+
+export default function Home({ books }) {
   return (
     <div className="container">
 
@@ -15,6 +17,21 @@ export default function Home() {
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
+
+      <div className={styles.bookCount}>
+        Number of Books I have Read This Year is:  {books.length}
+      </div>
+
+      <article className={styles.latestBook}>
+        <Image
+          src={latestBookImg}
+          alt="The Runaway Jury"
+          width={300}
+          height={500}
+        />
+        <h1>{books[0]}</h1>
+      </article>
+
 
     </div>
   )
@@ -27,3 +44,29 @@ Home.getLayout = function getLayout(page: ReactElement) {
     </Layout>
   )
 }
+
+export async function getStaticProps() {
+  const req = await fetch(`http://localhost:3000/posts.json`);
+  const data = await req.json();
+
+  return {
+    props: {
+      books: data
+    }
+  };
+}
+
+// export const bookList = async () => {
+//   const req = await fetch(`http://localhost:3000/posts.json`);
+//   const data = await req.json();
+
+//   console.log(data[0]);
+
+//   return {
+//     props: {
+//       books: data[0]
+//     }
+//   };
+// }
+
+// bookList();
