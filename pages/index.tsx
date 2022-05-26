@@ -6,6 +6,7 @@ import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import latestBookImg from '../public/images/theRunAwayJury.png'
 import { Blog } from "../utils/types"
+import { createNoSubstitutionTemplateLiteral } from 'typescript'
 
 
 export default function Home({ books }) {
@@ -54,7 +55,35 @@ export async function getStaticProps() {
   const res = await fetch(process.env.API_URL as string)
   const blogposts = await res.json()
 
-  console.log(blogposts[1].title)
+  // class BlogPost {
+  //   title: string;
+  //   content: string;
+  //   constructor(title: string, content: string) {
+  //     this.title = title;
+  //     this.content = content;
+  //   }
+  // }
+
+  let xx = []
+
+
+  let zz = []
+  for (let i = 0; i < blogposts.length; i++) {
+
+    xx.push(blogposts[i].title)
+    let aa = (blogposts)
+
+
+    let __FOUND = aa.find(function (post, index) {
+      if (post.title == 'the-runaway-jury')
+        return true;
+    });
+
+    console.log(__FOUND);
+
+  }
+
+  // console.log(`Fetched ${blogposts.length} blogs`)
 
   // return props
   return {

@@ -12,38 +12,47 @@ export default function BlogPost({ post }) {
                 <title>{post.name}</title>
             </Head>
 
-
             <h1>{name}</h1>
             <p>{post.content}</p>
 
-            
         </div>
     );
 }
 
 export async function getStaticProps({ params }) {
+    // get blogs data from API
+    const res = await fetch(process.env.API_URL as string)
+    const blogposts = await res.json()
 
-    const req = await fetch(`http://localhost:3000/${params.name}.json`);
-    console.log(req);
-    const data = await req.json();
+    let blogItem = blogposts.find(function (post: { title: string; }, index: any) {
+        if ((post.title).replace(/\s+/g, '-').toLowerCase() == `${params.name}`)
+            return true;
+    });
 
     return {
-        props: {post: data}
+        props: { post: blogItem }
     };
 }
 
 export async function getStaticPaths() {
-    const req = await fetch(`http://localhost:3000/posts.json`);
-    const data = await req.json();
+    // get blogs data from API
+    const res = await fetch(process.env.API_URL as string)
+    const blogposts = await res.json()
 
-    const paths = data.map(post => ({
+    let blogPostList = []
+    for (let i = 0; i < blogposts.length; i++) {
+        let blogTitle = blogposts[i].title
+        blogPostList.push(blogTitle.replace(/\s+/g, '-').toLowerCase())
+    }
+
+    const paths = blogPostList.map(post => ({
         params: {
             name: post
         }
     }));
-
+    // return props
     return {
         paths,
         fallback: false
-    };
+    }
 }
