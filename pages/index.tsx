@@ -5,6 +5,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import latestBookImg from '../public/images/theRunAwayJury.png'
+import { Blog } from "../utils/types"
 
 
 export default function Home({ books }) {
@@ -18,9 +19,9 @@ export default function Home({ books }) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
 
-      <div className={styles.bookCount}>
+      {/* <div className={styles.bookCount}>
         Number of Books I have Read This Year is:  {books.length}
-      </div>
+      </div> */}
 
       <article className={styles.latestBook}>
         <Image
@@ -29,7 +30,7 @@ export default function Home({ books }) {
           width={300}
           height={500}
         />
-        <h1>{books[0]}</h1>
+        {/* <h1>{books[0]}</h1> */}
       </article>
 
 
@@ -45,16 +46,32 @@ Home.getLayout = function getLayout(page: ReactElement) {
   )
 }
 
-export async function getStaticProps() {
-  const req = await fetch(`http://localhost:3000/posts.json`);
-  const data = await req.json();
 
+
+// GET PROPS FOR SERVER SIDE RENDERING
+export async function getServerSideProps() {
+  // get blogs data from API
+  const res = await fetch(process.env.API_URL as string)
+  const blogposts = await res.json()
+
+  console.log(blogposts)
+
+  // return props
   return {
-    props: {
-      books: data
-    }
-  };
+    props: { blogposts },
+  }
 }
+
+// export async function getStaticProps() {
+//   const req = await fetch(`http://localhost:3000/posts.json`);
+//   const data = await req.json();
+
+//   return {
+//     props: {
+//       books: data
+//     }
+//   };
+// }
 
 // export const bookList = async () => {
 //   const req = await fetch(`http://localhost:3000/posts.json`);
