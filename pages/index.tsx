@@ -49,12 +49,12 @@ Home.getLayout = function getLayout(page: ReactElement) {
 
 
 // GET PROPS FOR SERVER SIDE RENDERING
-export async function getServerSideProps() {
+export async function getStaticProps() {
   // get blogs data from API
   const res = await fetch(process.env.API_URL as string)
   const blogposts = await res.json()
 
-  console.log(blogposts)
+  console.log(blogposts[1].title)
 
   // return props
   return {
