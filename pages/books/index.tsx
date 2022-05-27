@@ -1,39 +1,44 @@
 import Link from 'next/link';
 
-export default function Blog({ link }) {
+export default function Blog({ bookList }) {
     return (
         <div>
             <h1>Blog</h1>
-            {link[0]}
-            <ul>
-                <li>
-                    <Link href={`/books/${link[0]}`}>
-                        <a> The Runaway Jury</a>
-                    </Link>
-                </li>
-                <li>
-                    <Link href="/books/a-promised-land">
-                        <a>A Promised Land</a>
-                    </Link>
-                </li>
+
+            <ul className='blogLinks'>
+
+                {bookList.map((item: any, index: number) => {
+                    return (
+                        <li key={index}>
+                            <Link href={`/books/${item.title.replace(/\s+/g, '-').toLowerCase()}`}>
+                                <a>{item.title}</a>
+                            </Link>
+                        </li>
+                    )
+                })
+                }
+
             </ul>
+
+            <div>
+                <hr />
+                <Link href='/books/manageposts'> Manage Posts </Link>
+                <hr />
+            </div>
         </div>
     );
 }
 
-export async function getStaticProps({ params }) {
-    // get blogs data from API
-    const res = await fetch(process.env.API_URL as string)
-    const blogposts = await res.json()
-
-    let blogPostList = []
-    for (let i = 0; i < blogposts.length; i++) {
-        let blogTitle = blogposts[i].title
-        blogPostList.push(blogTitle.replace(/\s+/g, '-').toLowerCase())
-        console.log(blogPostList)
-    }
+export async function getStaticProps() {
+    let res = await fetch("http://localhost:3000/api/blogposts", {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    });
+    let posts = await res.json();
 
     return {
-        props: { link: blogPostList }
+        props: { bookList: posts },
     };
 }

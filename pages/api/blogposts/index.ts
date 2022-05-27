@@ -21,7 +21,18 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
             const { Blog } = await connect() // connect to database
             res.json(await Blog.create(req.body).catch(catcher))
         },
+        // RESPONSE PUT REQUESTS
+        PUT: async (req: NextApiRequest, res: NextApiResponse) => {
+            const { Blog } = await connect() // connect to database
+            res.json(await Blog.findByIdAndUpdate(req.body, req.body).catch(catcher))
+        },
+        // RESPONSE DELETE REQUESTS
+        DELETE: async (req: NextApiRequest, res: NextApiResponse) => {
+            const { Blog } = await connect() // connect to database
+            res.json(await Blog.findByIdAndDelete(req.body).catch(catcher))
+        }
     }
+
 
     // Check if there is a response for the particular method, if so invoke it, if not response with an error
     const response = handleCase[method]
