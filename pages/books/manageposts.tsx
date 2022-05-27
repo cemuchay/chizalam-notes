@@ -1,4 +1,5 @@
 import Router from 'next/router'
+import { ids } from 'webpack';
 
 export default function ManagePosts({ blogList }) {
     // Handles the submit event on form submit.
@@ -34,13 +35,46 @@ export default function ManagePosts({ blogList }) {
         }
     }
 
-    // // Edit a blog post.
-    // const editPost = async (id) => {
+        // edit a blog post and save it to the database.
+        const editPost = async (id: any) => {
+            let title = (document.getElementById("first") as HTMLInputElement).value;
+            let content = (document.getElementById("last") as HTMLInputElement).value;
+    
+            const data = {
+                id: id,
+                title: title,
+                content: content
+            }
+    
+            const res = await fetch("/api/blogposts", {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            });
+    
+        }
 
-    //     await fetch(`http://localhost:3000/api/blogposts`, {
-    //         method: "DELETE",
-    //         body: id
-    //     });
+    // Moves the post to be edited to the input elements
+    const openPostEdit = async (title, content, id) => {
+
+        // Set the form data.
+        (document.getElementById("first") as HTMLInputElement).value = title;
+        (document.getElementById("last") as HTMLInputElement).value = content;
+        document.querySelector(".submitButton").textContent = "Edit Post";
+        document.querySelector("form").setAttribute("onsubmit", `x()`);
+        // document.querySelector(".submitButton").setAttribute("onclick", `editPost('${id}')`);
+
+        // // Set the form action to the edit route.
+        // document.getElementById("form").action = `/books/manageposts/${id}`;
+        // await fetch(`http://localhost:3000/api/blogposts`, {
+        //     method: "DELETE",
+        //     body: id
+        // });
+    }
+
+
 
     // delete a blog post.
     const deletePost = async (id) => {
@@ -52,12 +86,6 @@ export default function ManagePosts({ blogList }) {
 
         // Redirect to the blog page.
         Router.push("/books/manageposts")
-
-
-    }
-
-    const hi = (bro) => {
-        alert(bro)
     }
 
 
@@ -75,7 +103,7 @@ export default function ManagePosts({ blogList }) {
                     <label htmlFor="last">Content</label>
                     <input type="text" id="last" name="last" required />
 
-                    <button type="submit">Submit</button>
+                    <button className='submitButton' type="submit">Submit</button>
                 </form>
             </div>
 
@@ -89,8 +117,8 @@ export default function ManagePosts({ blogList }) {
                             <h2>{item.title}</h2>
                             <p>{item.content}</p>
 
-                            <button onClick={() => deletePost(item._id)} >Edit</button>
-                            <button onClick={() => hi(item._id)}>Delete</button>
+                            <button onClick={() => openPostEdit(item.title, item.content, item._id)} >Edit</button>
+                            <button onClick={() => deletePost(item._id)}>Delete</button>
                             <hr />
                         </div>
                     )
