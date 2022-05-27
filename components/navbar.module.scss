@@ -10,14 +10,10 @@
     color: $black;
 }
 
-.textLogoPrimary,
-.textLogoSecondary {
+.textLogoPrimary {
     font-size: 16px;
     font-weight: bold;
     color: black;
-    background: url('../public/vercel.svg') no-repeat;
-    height: 40px;
-    width: 180px;
     display: inline-block;
 }
 
