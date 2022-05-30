@@ -1,5 +1,4 @@
 import Router from 'next/router'
-import { ids } from 'webpack';
 
 export default function ManagePosts({ blogList }) {
     // Handles the submit event on form submit.
