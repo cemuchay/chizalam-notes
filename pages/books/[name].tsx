@@ -19,7 +19,7 @@ export default function BlogPost({ post }) {
     );
 }
 
-export async function getStaticProps({ params }) {
+export async function getServerSideProps({ params }) {
     // get blogs data from API
     const res = await fetch(process.env.API_URL as string)
     const blogposts = await res.json()
@@ -34,25 +34,25 @@ export async function getStaticProps({ params }) {
     };
 }
 
-export async function getStaticPaths() {
-    // get blogs data from API
-    const res = await fetch(process.env.API_URL as string)
-    const blogposts = await res.json()
+// export async function getStaticPaths() {
+//     // get blogs data from API
+//     const res = await fetch(process.env.API_URL as string)
+//     const blogposts = await res.json()
 
-    let blogPostList = []
-    for (let i = 0; i < blogposts.length; i++) {
-        let blogTitle = blogposts[i].title
-        blogPostList.push(blogTitle.replace(/\s+/g, '-').toLowerCase())
-    }
+//     let blogPostList = []
+//     for (let i = 0; i < blogposts.length; i++) {
+//         let blogTitle = blogposts[i].title
+//         blogPostList.push(blogTitle.replace(/\s+/g, '-').toLowerCase())
+//     }
 
-    const paths = blogPostList.map(post => ({
-        params: {
-            name: post
-        }
-    }));
-    // return props
-    return {
-        paths,
-        fallback: false
-    }
-}
+//     const paths = blogPostList.map(post => ({
+//         params: {
+//             name: post
+//         }
+//     }));
+//     // return props
+//     return {
+//         paths,
+//         fallback: false
+//     }
+// }
