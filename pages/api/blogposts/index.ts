@@ -24,7 +24,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         // RESPONSE PUT REQUESTS
         PUT: async (req: NextApiRequest, res: NextApiResponse) => {
             const { Blog } = await connect() // connect to database
-            res.json(await Blog.findByIdAndUpdate(req.body, { new: true }).catch(catcher))
+            res.json(await Blog.findByIdAndUpdate(req.body).catch(catcher))
         },
         // RESPONSE DELETE REQUESTS
         DELETE: async (req: NextApiRequest, res: NextApiResponse) => {
