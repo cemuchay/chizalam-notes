@@ -111,7 +111,7 @@ export default function ManagePosts({ blogList }) {
     )
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
     let res = await fetch("http://localhost:3000/api/blogposts", {
         method: "GET",
         headers: {
