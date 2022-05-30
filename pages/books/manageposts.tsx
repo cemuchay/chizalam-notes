@@ -13,7 +13,7 @@ export default function ManagePosts({ blogList }) {
         }
 
 
-        const res = await fetch("/api/blogposts", {
+        const res = await fetch("http://localhost:3000/api/blogposts", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -61,7 +61,7 @@ export default function ManagePosts({ blogList }) {
     // delete a blog post.
     const deletePost = async (id) => {
 
-        await fetch(`/api/blogposts`, {
+        await fetch(`http://localhost:3000/api/blogposts`, {
             method: "DELETE",
             body: id
         });
@@ -112,7 +112,7 @@ export default function ManagePosts({ blogList }) {
 }
 
 export async function getStaticProps() {
-    let res = await fetch("/api/blogposts", {
+    let res = await fetch("http://localhost:3000/api/blogposts", {
         method: "GET",
         headers: {
             "Content-Type": "application/json",

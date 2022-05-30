@@ -5,8 +5,8 @@ import Link from 'next/link'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import latestBookImg from '../public/images/theRunAwayJury.png'
-import { Blog } from "../utils/types"
-import { createNoSubstitutionTemplateLiteral } from 'typescript'
+// import { Blog } from "../utils/types"
+// import { createNoSubstitutionTemplateLiteral } from 'typescript'
 
 
 export default function Home({ books }) {
